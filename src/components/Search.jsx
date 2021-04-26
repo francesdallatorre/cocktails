@@ -7,10 +7,10 @@ export default class Search extends React.Component {
     return (
       <div>
         <div className="searchBar">
-          <form class="box" onSubmit={this.props.handleSubmit}>
-            <div class="control">
+          <form onSubmit={this.props.handleSubmit}>
+            <div className="control">
               <input
-                class="input is-rounded is-medium"
+                className="input is-rounded is-medium"
                 placeholder="search cocktails"
                 type="text"
                 id="drink"
