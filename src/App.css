@@ -3,13 +3,26 @@
   font-size: 20px;
 }
 
+/* Navigation */
+.navigation {
+  background-color: rgb(197, 112, 126);
+  width: 100%;
+}
+.app-name {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  padding: 10px;
+}
 /* Search */
 .searchBar {
-  width: 60%;
-  margin: 0 auto;
   margin-top: 20px;
 }
-
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* Results */
 .drinks {
   width: 90%;

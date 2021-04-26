@@ -20,7 +20,9 @@ export default class Results extends React.Component {
     this.setState({
       seeRecipe: !this.state.seeRecipe,
     });
+    this.props.hideSearchBar();
   }
+
   render() {
     return (
       <div>
@@ -41,7 +43,12 @@ export default class Results extends React.Component {
                   />
                   <span className="icons" onClick={() => this.getDrink(drink)}>
                     {/* getDrink() function takes in {drink} as a parameter and saves it on drink state*/}
-                    <i className="fas fa-cocktail"> Recipe</i>
+                    <i
+                      className="fas fa-cocktail"
+                      onClick={this.props.hideSearchBar}
+                    >
+                      Recipe
+                    </i>
                   </span>
                 </div>
               );

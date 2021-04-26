@@ -5,7 +5,7 @@ export default class Recipe extends React.Component {
   render() {
     return (
       <div className="recipeContainer">
-        {/* <button onClick={() => this.props.goBack()}>back</button> */}
+        <button onClick={() => this.props.goBack()}>back</button>
         {/* go back btn on nav bar */}
         <div className="recipe">
           <h1 className="recipeName">{this.props.drink.strDrink}</h1>

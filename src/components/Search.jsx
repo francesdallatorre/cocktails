@@ -1,13 +1,12 @@
 import React from "react";
 import "bulma";
-import Results from "./Results";
 
 export default class Search extends React.Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <div className="searchBar">
-          <form onSubmit={this.props.handleSubmit}>
+          <form onSubmit={this.props.handleSubmit} className="form">
             <div className="control">
               <input
                 className="input is-rounded is-medium"
@@ -18,13 +17,16 @@ export default class Search extends React.Component {
                 onChange={this.props.handleChange}
               />
             </div>
+            <div>
+              <button
+                onClick={this.props.handleSubmit}
+                class="button is-rounded"
+              >
+                search
+              </button>
+            </div>
           </form>
         </div>
-
-        <Results
-          // passing the rearch results data to Results Component
-          drinks={this.props.drinks}
-        />
       </div>
     );
   }

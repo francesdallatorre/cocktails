@@ -1,6 +1,8 @@
 import React from 'react'
+import Navigation from './components/Navigation'
 import Search from './components/Search'
 import './App.css'
+import Results from './components/Results';
 
 
 export default class App extends React.Component {
@@ -10,12 +12,13 @@ export default class App extends React.Component {
       baseURL: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
       drink: '', // query
       searchURL: '', // baseURL + drink
-      drinks: [] // json.drinks 
+      drinks: [], // json.drinks 
+      hide: false
     };
     // Bind Functions
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.reload = this.reload.bind(this)
+    this.reload = this.reload.bind(this);
   }
 
   // Handle Change Function
@@ -41,20 +44,48 @@ export default class App extends React.Component {
   reload() {
     window.location.reload()
   }
+  // Hide Search Bar
+  hideSearchBar() {
+    this.setState({
+      hide: !this.state.hide
+    })
+    setTimeout(() => {
+      console.log(this.state.hide)
+    }, 500);
+  }
   render() {
     return (
       <div>
+
+        {/* Navigation Component */}
+
+        <Navigation />
+
+        {/* Search Bar Component */}
+
         {
-          // Ternary statement. If result is null reload page else render Search Component
+          // Ternary statement to show or hide Search Bar
+          this.state.hide ? "" : <Search
+            // passing data to Search Component
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            drink={this.state.drink}
+          />
+        }
+
+        {/* Results Component */}
+
+        {
+          // Ternary statement. If result is null reload page else render Results Component
           this.state.drinks === null ?
             this.reload() :
-            <Search
-              // passing data to Search Component
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
+            <Results
+              // passing data to Results Component
               drink={this.state.drink}
-              drinks={this.state.drinks} />
+              drinks={this.state.drinks}
+              hideSearchBar={() => this.hideSearchBar()} />
         }
+
 
       </div>
     );
