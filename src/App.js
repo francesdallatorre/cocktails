@@ -3,6 +3,7 @@ import Navigation from './components/Navigation'
 import Search from './components/Search'
 import './App.css'
 import Results from './components/Results';
+import Home from './components/Home';
 
 
 export default class App extends React.Component {
@@ -13,7 +14,8 @@ export default class App extends React.Component {
       drink: '', // query
       searchURL: '', // baseURL + drink
       drinks: [], // json.drinks 
-      hide: false
+      hide: false,
+      showHome: true
     };
     // Bind Functions
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +38,8 @@ export default class App extends React.Component {
         .then(response => { return response.json() })
         .then(json => this.setState({
           drinks: json.drinks,
-          drink: ''
+          drink: '',
+          showHome: false
         }))
     })
   }
@@ -53,18 +56,16 @@ export default class App extends React.Component {
       console.log(this.state.hide)
     }, 500);
   }
+
   render() {
     return (
       <div>
 
         {/* Navigation Component */}
-
         <Navigation />
 
         {/* Search Bar Component */}
-
         {
-          // Ternary statement to show or hide Search Bar
           this.state.hide ? "" : <Search
             // passing data to Search Component
             handleChange={this.handleChange}
@@ -73,8 +74,12 @@ export default class App extends React.Component {
           />
         }
 
-        {/* Results Component */}
+        {/* Home */}
+        {
+          this.state.showHome ? <Home /> : ""
+        }
 
+        {/* Results Component */}
         {
           // Ternary statement. If result is null reload page else render Results Component
           this.state.drinks === null ?
@@ -83,9 +88,10 @@ export default class App extends React.Component {
               // passing data to Results Component
               drink={this.state.drink}
               drinks={this.state.drinks}
+              showHome={this.state.showHome}
+              reload={() => this.reload()}
               hideSearchBar={() => this.hideSearchBar()} />
         }
-
 
       </div>
     );

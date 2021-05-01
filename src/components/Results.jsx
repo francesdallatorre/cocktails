@@ -25,7 +25,15 @@ export default class Results extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="results">
+        {this.props.showHome ? (
+          ""
+        ) : (
+          <icon
+            className="go-home fas fa-home"
+            onClick={() => this.props.reload()}
+          ></icon>
+        )}
         {this.state.seeRecipe ? (
           <Recipe drink={this.state.drink} goBack={() => this.goBack()} />
         ) : (

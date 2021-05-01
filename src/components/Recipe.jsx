@@ -71,24 +71,29 @@ export default class Recipe extends React.Component {
   }
   render() {
     return (
-      <div className="recipeContainer">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
+      <div className="recipe">
+        <icon
+          className="back fas fa-backward"
+          onClick={() => this.props.goBack()}
+        >
+          {" "}
+        </icon>
+        <div className="card">
+          <h3 className="drink-name title is-3">{this.props.drink.strDrink}</h3>
+          <div className="card-image">
+            <figure>
               <img
                 src={this.props.drink.strDrinkThumb}
                 alt="Placeholder image"
+                className="recipe-image"
               />
             </figure>
           </div>
-          <header class="card-header">
-            <p class="card-header-title">{this.props.drink.strDrink}</p>
-          </header>
-          <table class="table is-bordered table is-fullwidth">
+          <table className="recipe-table">
             <thead>
               <tr>
-                <th>Measurements</th>
-                <th>Ingredients</th>
+                <th className="table-header">Measurements</th>
+                <th className="table-header">Ingredients</th>
               </tr>
             </thead>
             {/* Map through recipe object to return each measurement and ingredient */}
@@ -106,13 +111,18 @@ export default class Recipe extends React.Component {
               );
             })}
           </table>
-          <div class="card-content">
-            <div class="content">
-              <h4>Instructions</h4>
-              <p>{this.props.drink.strInstructions}</p>
-              <br />
-            </div>
-          </div>
+          <h4 className="label">Instructions:</h4>
+          <p>{this.props.drink.strInstructions}</p>
+          <br />
+          <h4>
+            Type: <em>{this.props.drink.strAlcoholic}</em>
+          </h4>
+          <h4>
+            Category: <em>{this.props.drink.strIBA}</em>
+          </h4>
+          <h4>
+            Glassware: <em>{this.props.drink.strGlass}</em>
+          </h4>
         </div>
       </div>
     );
