@@ -2,7 +2,7 @@
 
 ### Link to deployed app
 
-Link to deployed app on heroku -> [My Speed Rack](https://myspeedrack.herokuapp.com/)
+[My Speed Rack](https://myspeedrack.herokuapp.com/)
 
 ## Overview
 This App was built to seach for drink's recipes using the cocktailDB api.
