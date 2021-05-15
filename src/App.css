@@ -161,6 +161,5 @@
 .content {
   display: flex;
   justify-content: space-between;
-  text-align: right;
-  margin: 5px 20px;
+  text-align: justify;
 }
