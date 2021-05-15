@@ -15,14 +15,21 @@ export default class App extends React.Component {
       searchURL: '', // baseURL + drink
       drinks: [], // json.drinks 
       hide: false,
-      showHome: true
+      showHome: true,
+      randomDrink: '',
+      ingredients: '',
+      measurements: ''
+
     };
     // Bind Functions
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitRandom = this.submitRandom.bind(this)
     this.reload = this.reload.bind(this);
   }
-
+  componentDidMount() {
+    this.submitRandom();
+  }
   // Handle Change Function
   handleChange(e) {
     this.setState({ [e.target.id]: e.target.value })
@@ -39,9 +46,24 @@ export default class App extends React.Component {
         .then(json => this.setState({
           drinks: json.drinks,
           drink: '',
-          showHome: false
+          showHome: false,
         }))
     })
+  }
+  // Submit Random Generator
+  submitRandom(e) {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+      .then((response) => {
+        return response.json();
+      })
+      .then(json => this.setState({
+        randomDrink: json.drinks[0],
+        ingredients: [json.drinks[0].strIngredient1, json.drinks[0].strIngredient2, json.drinks[0].strIngredient3, json.drinks[0].strIngredient4, json.drinks[0].strIngredient5, json.drinks[0].strIngredient6],
+        measurements: [json.drinks[0].strMeasure1, json.drinks[0].strMeasure2, json.drinks[0].strMeasure3, json.drinks[0].strMeasure4, json.drinks[0].strMeasure5, json.drinks[0].strMeasure6],
+
+      }))
+
+    console.log("the drink is :", this.state.randomDrink)
   }
   // Reload Function
   reload() {
@@ -59,7 +81,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
 
         {/* Navigation Component */}
         <Navigation />
@@ -76,7 +98,10 @@ export default class App extends React.Component {
 
         {/* Home */}
         {
-          this.state.showHome ? <Home /> : ""
+          this.state.showHome ? <Home
+            submitRandom={(e) => this.submitRandom(e)}
+            randomDrink={this.state.randomDrink}
+          /> : ""
         }
 
         {/* Results Component */}

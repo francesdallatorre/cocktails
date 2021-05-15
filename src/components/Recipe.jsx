@@ -71,69 +71,63 @@ export default class Recipe extends React.Component {
   }
   render() {
     return (
-      <div className="recipe">
+      <div className="home">
         <icon
           className="back fas fa-backward"
           onClick={() => this.props.goBack()}
         >
           {" "}
         </icon>
-        <div className="card">
-          <h3 className="drink-name title is-3">{this.props.drink.strDrink}</h3>
-          <div className="card-image">
-            <figure>
-              <img
-                src={this.props.drink.strDrinkThumb}
-                alt="Placeholder image"
-                className="recipe-image"
-              />
-            </figure>
+        <div className="recipe">
+          <div className="random">
+            <h3 className="drink-name title is-3">
+              {this.props.drink.strDrink}
+            </h3>
+            <div className="card-image">
+              <figure>
+                <img
+                  src={this.props.drink.strDrinkThumb}
+                  alt="Placeholder image"
+                  className="recipe-image"
+                />
+              </figure>
+            </div>
+            <div className="ingredients">
+              <h4 className="label">Ingredients</h4>
+
+              {this.state.ingredients.map((ingredient) => {
+                if (ingredient.ingredient == null) {
+                  return "";
+                } else if (ingredient.measurement == null) {
+                  return "";
+                }
+                return (
+                  <div className="content">
+                    <div>
+                      <p>{ingredient.measurement}</p>
+                    </div>
+                    <div>
+                      <p>{ingredient.ingredient}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <h4 className="label">Instructions</h4>
+            <p className="instructions-text">
+              {this.props.drink.strInstructions}
+            </p>
+            <br />
+            <h4>
+              Type: <em>{this.props.drink.strAlcoholic}</em>
+            </h4>
+            <h4>
+              Glassware: <em>{this.props.drink.strGlass}</em>
+            </h4>
           </div>
-          <table className="recipe-table">
-            <thead>
-              <tr>
-                <th className="table-header">Measurements</th>
-                <th className="table-header">Ingredients</th>
-              </tr>
-            </thead>
-            {/* Map through recipe object to return each measurement and ingredient */}
-            {this.state.ingredients.map((ingredient) => {
-              if (ingredient.ingredient == null) {
-                return "";
-              }
-              return (
-                <tbody>
-                  <tr>
-                    <td>{ingredient.measurement}</td>
-                    <td>{ingredient.ingredient}</td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </table>
-          <h4 className="label">Instructions:</h4>
-          <p>{this.props.drink.strInstructions}</p>
-          <br />
-          <h4>
-            Type: <em>{this.props.drink.strAlcoholic}</em>
-          </h4>
-          <h4>
-            Category: <em>{this.props.drink.strIBA}</em>
-          </h4>
-          <h4>
-            Glassware: <em>{this.props.drink.strGlass}</em>
-          </h4>
         </div>
       </div>
     );
   }
-}
-
-// use this later
-
-{
-  /* <button onClick={() => this.props.goBack()}>back</button> */
-}
-{
-  /* go back btn on nav bar */
 }
