@@ -98,9 +98,8 @@ export default class Recipe extends React.Component {
               {this.state.ingredients.map((ingredient) => {
                 if (ingredient.ingredient == null) {
                   return "";
-                } else if (ingredient.measurement == null) {
-                  return "";
                 }
+                console.log(ingredient.ingredient);
                 return (
                   <div className="content">
                     <div>
